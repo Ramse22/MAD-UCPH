@@ -20,6 +20,8 @@ model_single = linreg.LinearRegression()
 model_single.fit(X_train[:,0], t_train)
 
 # (c) fit linear regression model using all features
+model_all = linreg.LinearRegression()
+model_all.fit(X_train,t_train)
 
 # (d) evaluation of results
 
