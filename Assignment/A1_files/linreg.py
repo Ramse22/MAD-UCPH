@@ -32,7 +32,6 @@ class LinearRegression():
         self.w = numpy.linalg.pinv((numpy.dot(X.T, X)))
         self.w = numpy.dot(self.w, X.T)
         self.w = numpy.dot(self.w, t)
-        print(self.w)
 
 
     def predict(self, X):
@@ -47,12 +46,10 @@ class LinearRegression():
         -------
         predictions : Array of shape [n_samples, 1]
         """
-
         X = numpy.array(X).reshape((len(X), -1))
-        t = numpy.array(t).reshape((len(t), 1))
 
         ones = numpy.ones((X.shape[0], 1))
         X = numpy.concatenate((ones, X), axis=1)
 
         self.t_new = np.dot(np.transpose(X),self.w)
-        print(self.t_new)
+

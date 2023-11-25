@@ -18,10 +18,11 @@ print("Number of features: %i" % X_train.shape[1])
 # (b) fit linear regression using only the first feature
 model_single = linreg.LinearRegression()
 model_single.fit(X_train[:,0], t_train)
+print(model_single.w)
 
 # (c) fit linear regression model using all features
 model_all = linreg.LinearRegression()
 model_all.fit(X_train,t_train)
-
+print(model_all.w)
 # (d) evaluation of results
 
