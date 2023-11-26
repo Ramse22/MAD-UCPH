@@ -28,16 +28,19 @@ print(model_all.w)
 
 # (d) evaluation of results
 def rmse(t, tp):
-    return np.sqrt(np.mean(np.linalg.norm(t - tp) ** 2))
+    return np.sqrt(np.mean((t - tp) ** 2))
 
 
+print(model_single.predict)
 t_predict = model_single.predict(X_test[:, 0])
 print(rmse(t_test, t_predict))
+
 
 plt.scatter(t_test, t_predict)
 plt.xlabel("True house prices")
 plt.ylabel("Estimates with first feature")
 plt.title("2D prices plot with first feature")
+plt.savefig("2_feature.png", bbox_inches="tight")
 plt.show()
 
 t_predict = model_all.predict(X_test)
@@ -47,4 +50,5 @@ plt.scatter(t_test, t_predict)
 plt.xlabel("True house prices")
 plt.ylabel("Estimates with all features")
 plt.title("2D prices plot with all features")
+plt.savefig("all_feature.png", bbox_inches="tight")
 plt.show()

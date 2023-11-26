@@ -20,7 +20,7 @@ v_t_train = np.full(t_train.size, np.mean(t_train))
 
 
 def rmse(t, tp):
-    return np.sqrt(np.mean(np.linalg.norm(t - tp) ** 2))
+    return np.sqrt(np.mean((t - tp) ** 2))
 
 
 print(rmse(t_test, v_t_train))
@@ -30,4 +30,5 @@ plt.scatter(t_test, v_t_train)
 plt.xlabel("True house prices")
 plt.ylabel("Estimates")
 plt.title("2D prices plot")
+plt.savefig("average_plot.png", bbox_inches="tight")
 plt.show()

@@ -23,6 +23,7 @@ class LinearRegression:
         X : Array of shape [n_samples, n_features]
         t : Array of shape [n_samples, 1]
         """
+
         X = np.array(X).reshape((len(X), -1))
         t = np.array(t).reshape((len(t), 1))
 
