@@ -14,7 +14,7 @@ class LinearRegression:
     def __init__(self):
         pass
 
-    def fit(self, X, A, t):
+    def fit(self, X, t):
         """
         Fits the linear regression model.
 
@@ -30,9 +30,8 @@ class LinearRegression:
         ones = np.ones((X.shape[0], 1))
         X = np.concatenate((ones, X), axis=1)
 
-        # self.w = np.linalg.pinv((np.dot(X.T, X)))
-        # self.w = np.dot(self.w, X.T)
-        # self.w = np.dot(self.w, t)
+        A = np.diagflat(np.square(t))
+
         self.w = np.linalg.solve(X.T @ A @ X, X.T @ A @ t)
 
     def predict(self, X):

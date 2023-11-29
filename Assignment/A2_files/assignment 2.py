@@ -15,9 +15,17 @@ print("Number of training instances: %i" % X_train.shape[0])
 print("Number of test instances: %i" % X_test.shape[0])
 print("Number of features: %i" % X_train.shape[1])
 
-A = np.fill_diagonal(np.zeros((t_train.size, t_train.size)), np.square(t_train))
-print(A)
-
+#Exercise 1, b)
 model_all = linweightreg.LinearRegression()
-model_all.fit(X_train, A, t_train)
+model_all.fit(X_train, t_train)
 print(model_all.w)
+
+t_predict = model_all.predict(X_test)
+plt.scatter(t_test, t_predict)
+plt.xlabel("True house prices")
+plt.ylabel("Estimates from weighted linear regression")
+plt.title("2D prices plot from weighted linear regression estimates")
+plt.savefig("WeightedLinearReg.png", bbox_inches="tight")
+plt.show()
+
+
