@@ -46,7 +46,7 @@ X = X.reshape((len(X), 1))
 print("Shape of our data matrix: %s" % str(X.shape))
 print("Shape of our target vector: %s" % str(t.shape))
 
-lambdas = np.concatenate([np.array([0]),np.logspace(-8, 0, 100, base=10)])
+lambdas = np.concatenate([np.array([0]), np.logspace(-8, 0, 100, base=10)])
 computed_rmse = np.zeros(lambdas.shape)
 
 polynomial = Polynomial.Polynomial(order=1)
@@ -55,7 +55,7 @@ for idx, lam in enumerate(lambdas):
     for i in range(0, X.shape[0]):
         polynomial.fit(np.delete(X, i), np.delete(t, i), lam)
         t_predict[i] = polynomial.predict(X[i])
-    computed_rmse[idx] = rmse(t,t_predict)
+    computed_rmse[idx] = rmse(t, t_predict)
     # print("lam=%.10f and rmse=%.10f" % (lam, computed_rmse[idx]))
 
 
@@ -66,10 +66,16 @@ plt.savefig("lambda_rmse_firstorder.png", bbox_inches="tight")
 plt.show()
 
 idx = np.argmin(computed_rmse)
-polynomial.fit(X,t,lambdas[idx])
-print("lam=%.10f and w0=%.10f and w1=%.10f" % (float(lambdas[idx]), polynomial.w[0,0], polynomial.w[1,0]))
-polynomial.fit(X,t,lambdas[0])
-print("lam=%.10f and w0=%.10f and w1=%.10f" % (float(lambdas[0]), polynomial.w[0,0], polynomial.w[1,0]))
+polynomial.fit(X, t, lambdas[idx])
+print(
+    "lam=%.10f and w0=%.10f and w1=%.10f"
+    % (float(lambdas[idx]), polynomial.w[0, 0], polynomial.w[1, 0])
+)
+polynomial.fit(X, t, lambdas[0])
+print(
+    "lam=%.10f and w0=%.10f and w1=%.10f"
+    % (float(lambdas[0]), polynomial.w[0, 0], polynomial.w[1, 0])
+)
 
 # Exercice 2, b)
 
@@ -81,9 +87,8 @@ for idx, lam in enumerate(lambdas):
     for i in range(0, X.shape[0]):
         polynomial.fit(np.delete(X, i), np.delete(t, i), lam)
         t_predict[i] = polynomial.predict(X[i])
-    computed_rmse[idx] = rmse(t,t_predict)
+    computed_rmse[idx] = rmse(t, t_predict)
     # print("lam=%.10f and rmse=%.10f" % (lam, computed_rmse[idx]))
-
 
 
 plt.scatter(lambdas, computed_rmse)
@@ -93,7 +98,27 @@ plt.savefig("lambda_rmse_fourthorder.png", bbox_inches="tight")
 plt.show()
 
 idx = np.argmin(computed_rmse)
-polynomial.fit(X,t,lambdas[idx])
-print("lam=%.10f and w0=%.10f and w1=%.10f and w2=%.10f and w3=%.10f and w4=%.10f" % (float(lambdas[idx]), polynomial.w[0,0], polynomial.w[1,0], polynomial.w[2,0], polynomial.w[3,0], polynomial.w[4,0]))
-polynomial.fit(X,t,lambdas[0])
-print("lam=%.10f and w0=%.10f and w1=%.10f and w2=%.10f and w3=%.10f and w4=%.10f" % (float(lambdas[0]), polynomial.w[0,0], polynomial.w[1,0], polynomial.w[2,0], polynomial.w[3,0], polynomial.w[4,0]))
+polynomial.fit(X, t, lambdas[idx])
+print(
+    "lam=%.10f and w0=%.10f and w1=%.10f and w2=%.10f and w3=%.10f and w4=%.10f"
+    % (
+        float(lambdas[idx]),
+        polynomial.w[0, 0],
+        polynomial.w[1, 0],
+        polynomial.w[2, 0],
+        polynomial.w[3, 0],
+        polynomial.w[4, 0],
+    )
+)
+polynomial.fit(X, t, lambdas[0])
+print(
+    "lam=%.10f and w0=%.10f and w1=%.10f and w2=%.10f and w3=%.10f and w4=%.10f"
+    % (
+        float(lambdas[0]),
+        polynomial.w[0, 0],
+        polynomial.w[1, 0],
+        polynomial.w[2, 0],
+        polynomial.w[3, 0],
+        polynomial.w[4, 0],
+    )
+)

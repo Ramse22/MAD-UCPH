@@ -14,7 +14,7 @@ class Polynomial:
         """create the X matrix"""
 
         ones = np.ones((X.shape[0], 1))
-        X = np.concatenate([np.power(X, i) for i in range(1, self.order+1)], axis=1)
+        X = np.concatenate([np.power(X, i) for i in range(1, self.order + 1)], axis=1)
         return np.concatenate((ones, X), axis=1)
 
     def fit(self, X, t, l):
