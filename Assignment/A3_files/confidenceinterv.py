@@ -15,6 +15,7 @@ import scipy.stats
 import matplotlib.pyplot as plt
 import numpy as np
 
+
 # Fix the random generator seed
 np.random.seed(111)
 
@@ -30,7 +31,7 @@ n = 9
 gamma = 0.99 # 99 %
 
 # Number of experiments to carry out
-nexp = 20 # TODO: Change this when you have developed your code
+nexp = 10000 # TODO: Change this when you have developed your code
 
 
 counter = 0
@@ -42,7 +43,8 @@ for i in range(nexp):
     fac2 = scipy.stats.norm.ppf((1-gamma)/2 + gamma, 0, 1) # computes the 99.5% quantile of a Gaussian, roughly 2.576   
     xmean = np.mean(x) # Sample mean
     a = xmean - fac2*sig/np.sqrt(n) 
-    b = xmean - fac1*sig/np.sqrt(n) 
+    b = xmean - fac1*sig/np.sqrt(n)
+    c =
     ac = xmean - fac2*sig/np.sqrt(n) # TODO: adapt for c)
     bc = xmean - fac1*sig/np.sqrt(n) # TODO: adapt for c)
     
