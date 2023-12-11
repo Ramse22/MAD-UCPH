@@ -117,3 +117,27 @@ if nexp < 1000:
     plt.ylabel("Number of experiments")
     plt.title("c) The correct $\mu$ value in blue")
     plt.show()
+
+
+# Exercise 4 question c):
+
+
+def compute_T(k):
+    D = np.array([1.0, 0.5, -0.5, 1.5, 0.5])
+    D = np.concatenate([D for i in range(k)], axis=0)
+    return np.mean(D) / np.sqrt(np.var(D, ddof=1) / D.size)
+
+
+T = [compute_T(k) for k in range(1, 10)]
+t = [scipy.stats.t.ppf(1 - 0.05, 5 * k - 1) for k in range(1, 10)]
+k = range(1, 10)
+
+
+plt.plot(k, T, "r")
+plt.plot(k, t, "b")
+plt.xlabel("number of duplicates of D")
+plt.ylabel("T (red) and critical value (blue)")
+plt.title(
+    "computed T and critical value as a function of the number of duplication of D"
+)
+plt.show()
