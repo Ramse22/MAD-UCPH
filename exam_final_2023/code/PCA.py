@@ -21,4 +21,3 @@ print(Cov)
 # eigenvalues and vectors:
 eigenvalues, eigenvectors = np.linalg.eig(Cov)
 print("eigenvalues:", eigenvalues, "eigenvectors:", eigenvectors)
-# TODO: detail computation of eigenvalues and eigenvectors
