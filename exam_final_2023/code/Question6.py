@@ -1,3 +1,5 @@
+import random
+
 import pandas as pd
 import numpy as np
 from sklearn.ensemble import RandomForestClassifier
@@ -23,15 +25,43 @@ def read_data(file_name):
 X_train, t_train = read_data("../data/heart_simplified_train_2023.csv")
 X_val, t_val = read_data("../data/heart_simplified_validation_2023.csv")
 X_test, t_test = read_data("../data/heart_simplified_validation_2023.csv")
-print(X_test)
+
 # b)
-
-
 RFC = RandomForestClassifier()
-predictor = RFC.fit(X_train, t_train.ravel())
-print(predictor.score(X_test, t_test))
+RFC.fit(X_train, t_train.ravel())
+RFC.predict(X_train)
+print(RFC.score(X_train, t_train))
 
-# c)
-n_features = [np.sqrt(X_val.shape[1]), np.log2(X_val.shape[1])]
+# c) and d)
+max_features = ["sqrt", "log2"]
 criterion = ["gini", "entropy"]
 max_depth = [2, 5, 7, 10, 15]
+
+best_scores = (0, 0)
+best_params = None
+for _ in range(15):
+    params = [
+        random.choice(max_features),
+        random.choice(criterion),
+        random.choice(max_depth),
+    ]
+    RFC = RandomForestClassifier(
+        max_features=params[0], criterion=params[1], max_depth=params[2]
+    )
+    RFC.fit(X_train, t_train.ravel())
+    t_predict = RFC.predict(X_val)
+    corrects = np.sum(t_val.ravel() == t_predict.ravel())
+    probas = RFC.predict_proba(X_val)
+    corrects_probas = []
+    for idx, label in enumerate(t_predict.ravel()):
+        if label == 1 and probas[idx, 1] > probas[idx, 0]:
+            corrects_probas.append(probas[idx, 1])
+        elif label == 0 and probas[idx, 0] < probas[idx, 1]:
+            corrects_probas.append(probas[idx, 0])
+    if best_scores[1] < np.mean(corrects_probas):
+        best_scores = (corrects, np.mean(corrects_probas))
+        best_params = params
+        print(
+            f"criterion = {params[1]} ; max depth = {params[2]} ; max features = {params[0]} ; accuracy on validation data = {corrects/len(t_val)} ; number of correctly classified validation samples = {corrects}"
+        )
+print(f" best metrics: {best_scores}, best parameters: {best_params}")
