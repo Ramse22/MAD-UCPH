@@ -3,6 +3,7 @@ import random
 import pandas as pd
 import numpy as np
 from sklearn.ensemble import RandomForestClassifier
+from matplotlib import pyplot as plt
 
 
 # a)
